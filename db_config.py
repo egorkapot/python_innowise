@@ -1,11 +1,14 @@
-import os
+from __future__ import annotations
+
 import json
+import os
+
 
 def get_config_string(source='json'):
     if source == 'json':
-        with open('config.json', 'r') as f:
+        with open('config.json') as f:
             config = json.load(f)
-        
+
         db_name = config['CONFIGURATION']['DATABASE_NAME']
         db_type = config['CONFIGURATION']['DB_TYPE']
         db_host = config['CONFIGURATION']['HOST_ADDRESS']
@@ -22,7 +25,5 @@ def get_config_string(source='json'):
         db_password = os.environ.get('DB_PASSWORD')
 
     db_config = f'{db_type}://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
-        
-    return db_config
-    
 
+    return db_config
