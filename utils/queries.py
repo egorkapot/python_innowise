@@ -1,6 +1,7 @@
 from enum import Enum
 
-class Queries():
+
+class Queries(Enum):
 
     query_select_rooms = """
     SELECT *
@@ -63,6 +64,3 @@ class Queries():
         sex CHAR(1),
         FOREIGN KEY (room) REFERENCES task_1.rooms(id) ON DELETE CASCADE);
         """
-
-
-print(Queries().query_age_diff)
