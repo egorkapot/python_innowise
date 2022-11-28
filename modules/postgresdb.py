@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from typing import Literal
-from typing import Optional
 
 import pandas as pd
 import psycopg2 as ps

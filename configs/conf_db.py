@@ -10,7 +10,6 @@ class Config:
     Creating a configuration to connect to database
     """
 
-    # Нужно ли писать аннотацию на возвращение иниту который просто инициализирует
     def __init__(self, source='json') -> None:
         """
         Creating a config string based on the input source.
