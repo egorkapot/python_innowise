@@ -14,7 +14,9 @@ if __name__ == '__main__':
 
     db_config = Config().get_config()
     db = Postgres(db_config)
-    db.create_schema(Queries.schema)
+    queries = Queries.get_query_dict()
+
+    db.create_schema(queries.get('schema'))
 
     print('Schema created')
 
@@ -22,7 +24,7 @@ if __name__ == '__main__':
     students_df = pd.read_json(STUDENTS)
     students_df['birthday'] = pd.to_datetime(students_df['birthday'])
     db.write_dataframe_to_database(
-        df=students_df, db_config=db_config,  table_name='students', schema='task_1',
+        df=students_df, db_config=db_config, table_name='students', schema='task_1',
     )
     db.write_dataframe_to_database(
         df=rooms_df, db_config=db_config, table_name='rooms', schema='task_1',
@@ -30,14 +32,7 @@ if __name__ == '__main__':
 
     print('Dataframes were created and loaded to database')
 
-    list_of_rooms = db.get_df_from_db(Queries.query_list_of_rooms)
-    lowest_avg_age = db.get_df_from_db(Queries.query_lowest_avg_age)
-    age_diff = db.get_df_from_db(Queries.query_age_diff)
-    gender = db.get_df_from_db(Queries.query_gender)
-    print('Dataframes were created from queries')
-
-    db.df_to_json(list_of_rooms, 'source/output_data/rooms.json')
-    db.df_to_json(lowest_avg_age, 'source/output_data/lowest_avg_age.json')
-    db.df_to_json(age_diff, 'source/output_data/age_diff.json')
-    db.df_to_json(gender, 'source/output_data/gender.json')
-    print('JSONs were created')
+    for query_name, query in queries.items():
+        if query_name != 'schema':
+            result_df = db.get_df_from_db(query)
+            result_df.to_json(path_or_buf=f'./source/output_data/{query_name}_result.json', orient='table')

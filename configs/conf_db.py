@@ -5,22 +5,21 @@ import os
 
 
 class Config:
-    """
-    Description
 
+    """
+    Creating a configuration to connect to database
+    """
+
+    # Нужно ли писать аннотацию на возвращение иниту который просто инициализирует
+    def __init__(self, source='json') -> None:
+        """
         Creating a config string based on the input source.
         If source is json - takes the credentials from config.json file located in configs directory
-        If source is env - takes the creadentials from the environment which were preuploaded from .envrc file
-
-    Returns:
-        String with credentials for connection
-    """
-
-    #Нужно ли писать аннотацию на возвращение иниту который просто инициализирует
-    def __init__(self, source='json') -> str:
+        If source is env - takes the credentials from the environment which were preuploaded from .envrc file
+        """
 
         if source == 'json':
-            with open('config.json') as f:
+            with open('configs/config.json') as f:
                 config = json.load(f)
 
             db_name = config['CONFIGURATION']['DATABASE_NAME']
@@ -41,4 +40,10 @@ class Config:
         self.db_config = f'{db_type}://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
 
     def get_config(self) -> str:
+        """
+        Getting config from class
+
+        Returns:
+            String with credentials for connection
+        """
         return self.db_config
