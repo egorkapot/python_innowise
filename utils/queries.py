@@ -1,8 +1,13 @@
+from __future__ import annotations
+
 from enum import Enum
 
 
 class Queries(Enum):
 
+    """
+    Contains queries that extract the data from database
+    """
     query_select_rooms = """
     SELECT *
     FROM task_1.rooms

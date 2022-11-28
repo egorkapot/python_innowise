@@ -5,8 +5,19 @@ import os
 
 
 class Config:
+    """
+    Description
 
-    def __init__(self, source='json'):
+        Creating a config string based on the input source.
+        If source is json - takes the credentials from config.json file located in configs directory
+        If source is env - takes the creadentials from the environment which were preuploaded from .envrc file
+
+    Returns:
+        String with credentials for connection
+    """
+
+    #Нужно ли писать аннотацию на возвращение иниту который просто инициализирует
+    def __init__(self, source='json') -> str:
 
         if source == 'json':
             with open('config.json') as f:
@@ -29,5 +40,5 @@ class Config:
 
         self.db_config = f'{db_type}://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
 
-    def get_config(self):
+    def get_config(self) -> str:
         return self.db_config
