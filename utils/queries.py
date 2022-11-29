@@ -4,17 +4,18 @@ import os
 
 
 class Queries():
-
     """
-        Contains dictionary of queries that extract the data from database
+    Contains dictionary of queries that extract the data from database
     """
-
     _query_dict = dict()
 
     @classmethod
     def get_query_dict(cls) -> dict:
         """
         Getting dictionary with queries from class
+
+        Args: 
+            None
 
         Returns:
             Dictionaty with SQL queries

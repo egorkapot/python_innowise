@@ -15,6 +15,12 @@ class Config:
         Creating a config string based on the input source.
         If source is json - takes the credentials from config.json file located in configs directory
         If source is env - takes the credentials from the environment which were preuploaded from .envrc file
+
+        Args:
+            source: string with source type, by default is JSON
+
+        Returns:
+            None
         """
 
         if source == 'json':
@@ -41,6 +47,9 @@ class Config:
     def get_config(self) -> str:
         """
         Getting config from class
+
+        Args: 
+            None
 
         Returns:
             String with credentials for connection

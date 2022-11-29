@@ -10,7 +10,6 @@ from sqlalchemy import create_engine
 class Postgres:
     """
     Postgres class that contains ETL functions
-
     """
 
     def __init__(self, db_config: str):

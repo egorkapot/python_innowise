@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import logging
+from datetime import date
+
 import pandas as pd
 
 from configs.conf_db import Config
@@ -10,6 +13,8 @@ ROOMS = 'source/input_data/rooms.json'
 STUDENTS = 'source/input_data/students.json'
 
 
+logging.basicConfig(filename='debug.log', level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%m-%y %H:%M:%S')
+
 if __name__ == '__main__':
 
     db_config = Config().get_config()
@@ -18,7 +23,7 @@ if __name__ == '__main__':
 
     db.create_schema(queries.get('schema'))
 
-    print('Schema created')
+    logging.debug('Schema was created')
 
     rooms_df = pd.read_json(ROOMS)
     students_df = pd.read_json(STUDENTS)
@@ -30,9 +35,11 @@ if __name__ == '__main__':
         df=rooms_df, db_config=db_config, table_name='rooms', schema='task_1',
     )
 
-    print('Dataframes were created and loaded to database')
+    logging.debug('Dataframes were created and loaded to database')
 
     for query_name, query in queries.items():
         if query_name != 'schema':
             result_df = db.get_df_from_db(query)
             result_df.to_json(path_or_buf=f'./source/output_data/{query_name}_result.json', orient='table')
+
+    logging.debug('Dataframes were loaded to JSONs')
