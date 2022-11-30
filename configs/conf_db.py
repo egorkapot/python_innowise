@@ -10,7 +10,7 @@ class Config:
     Creating a configuration to connect to database
     """
 
-    def __init__(self, source='json') -> None:
+    def __init__(self, source='json', path='configs/config.json') -> None:
         """
         Creating a config string based on the input source.
         If source is json - takes the credentials from config.json file located in configs directory
@@ -24,34 +24,37 @@ class Config:
         """
 
         if source == 'json':
-            with open('configs/config.json') as f:
+            with open(path) as f:
                 config = json.load(f)
 
-            db_name = config['CONFIGURATION']['DATABASE_NAME']
-            db_type = config['CONFIGURATION']['DB_TYPE']
-            db_host = config['CONFIGURATION']['HOST_ADDRESS']
-            db_port = config['CONFIGURATION']['PORT']
-            db_user = config['CONFIGURATION']['DB_USER']
-            db_password = config['CONFIGURATION']['DB_PASSWORD']
+            self.db_name = config['CONFIGURATION']['DATABASE_NAME']
+            self.db_type = config['CONFIGURATION']['DB_TYPE']
+            self.db_host = config['CONFIGURATION']['HOST_ADDRESS']
+            self.db_port = config['CONFIGURATION']['PORT']
+            self.db_user = config['CONFIGURATION']['DB_USER']
+            self.db_password = config['CONFIGURATION']['DB_PASSWORD']
 
         elif source == 'env':
-            db_name = os.environ.get('DATABASE_NAME')
-            db_type = os.environ.get('DB_TYPE')
-            db_host = os.environ.get('HOST_ADDRESS')
-            db_port = os.environ.get('PORT')
-            db_user = os.environ.get('DB_USER')
-            db_password = os.environ.get('DB_PASSWORD')
+            self.db_name = os.environ.get('DATABASE_NAME')
+            self.db_type = os.environ.get('DB_TYPE')
+            self.db_host = os.environ.get('HOST_ADDRESS')
+            self.db_port = os.environ.get('PORT')
+            self.db_user = os.environ.get('DB_USER')
+            self.db_password = os.environ.get('DB_PASSWORD')
 
-        self.db_config = f'{db_type}://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
+        else:
+            raise ValueError('Expected json or env file')
 
-    def get_config(self) -> str:
+    def create_connection(self) -> str:
         """
         Getting config from class
 
-        Args: 
+        Args:
             None
 
         Returns:
             String with credentials for connection
         """
+        self.db_config = f'{self.db_type}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}'
+
         return self.db_config

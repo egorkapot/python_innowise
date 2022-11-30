@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*/__pycache__
 
 # C extensions
 *.so
@@ -20,7 +21,10 @@ var/
 .installed.cfg
 *.egg
 .envrc
+.env
 .vscode
+.mypy_cache
+.pytest_cache
 
 # Installer logs
 pip-log.txt

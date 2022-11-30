@@ -14,7 +14,7 @@ class Queries():
         """
         Getting dictionary with queries from class
 
-        Args: 
+        Args:
             None
 
         Returns:
@@ -28,5 +28,3 @@ class Queries():
                     string = f_in.read()
                     cls._query_dict[name] = string
         return cls._query_dict
-
-    

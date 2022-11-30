@@ -1,18 +1,24 @@
+from __future__ import annotations
+
 import pytest
 
 from configs.conf_db import Config
-from modules.postgresdb import Postgres
 
 
-@pytest.fixture
-def get_config():
-    config = Config().get_config()
-    return config
+def test_can_instantiate_config_json():
+    Config(source='json', path='tests/config.json')
 
 
+def test_config_can_read_json(connection_string_result):
+    conn_string = Config(source='json', path='tests/config.json').create_connection()
+    assert connection_string_result == conn_string
 
-def test_get_config(get_config):
-    assert get_config  == 'postgresql://postgres:1@127.0.0.1:5432/task1'
+
+def test_can_not_create_config_if_path_is_incorrect():
+    with pytest.raises(FileNotFoundError):
+        Config(path='somepath')
 
 
-
+def test_can_not_create_config_if_source_is_incorrect():
+    with pytest.raises(ValueError):
+        Config(source='somesource')

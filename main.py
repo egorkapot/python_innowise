@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from datetime import date
 
 import pandas as pd
 
@@ -13,11 +12,17 @@ ROOMS = 'source/input_data/rooms.json'
 STUDENTS = 'source/input_data/students.json'
 
 
-logging.basicConfig(filename='debug.log', level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%m-%y %H:%M:%S')
+logging.basicConfig(
+    filename='debug.log', level=logging.DEBUG,
+    format='%(asctime)s - %(message)s', datefmt='%d-%m-%y %H:%M:%S',
+)
+logger = logging.getLogger(__name__)
+# logger.info()
+
 
 if __name__ == '__main__':
 
-    db_config = Config().get_config()
+    db_config = Config().create_connection()
     db = Postgres(db_config)
     queries = Queries.get_query_dict()
 
