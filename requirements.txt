@@ -1,0 +1,5 @@
+pandas==1.5.1
+psycopg2==2.9.5
+psycopg2_binary==2.9.5
+pytest==7.2.0
+SQLAlchemy==1.4.44
