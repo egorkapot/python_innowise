@@ -45,7 +45,6 @@ class Config:
         else:
             raise ValueError('Expected json or env file')
 
-
     def create_connection(self) -> str:
         """
         Getting config from class
@@ -57,6 +56,5 @@ class Config:
             String with credentials for connection
         """
         self.db_config = f'{self.db_type}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}'
-
 
         return self.db_config

@@ -3,14 +3,27 @@ from __future__ import annotations
 import os
 
 
-class Queries():
+class Queries:
     """
     Contains dictionary of queries that extract the data from database
     """
-    _query_dict = dict()
 
-    @classmethod
-    def get_query_dict(cls) -> dict:
+    def __init__(self, directory='queries/'):
+        """
+        Initializing the directory, path and dict objects.
+        Directory - location of the file
+        Query_dict - dictionary object
+
+        Args:
+            directory: location of the file, queries/ by default
+
+        Returns:
+            None
+        """
+        self.directory = directory
+        self.query_dict = dict()
+
+    def get_query_dict(self) -> dict:
         """
         Getting dictionary with queries from class
 
@@ -18,13 +31,13 @@ class Queries():
             None
 
         Returns:
-            Dictionaty with SQL queries
+            Dictionary with SQL queries
         """
 
-        for filename in os.scandir('queries'):
+        for filename in os.scandir(self.directory):
             if filename.is_file():
-                name = filename.path.lstrip('queries').replace('/', '').rstrip('.sql')
+                name = filename.path.replace(self.directory, '').rstrip('.sql')
                 with open(filename) as f_in:
                     string = f_in.read()
-                    cls._query_dict[name] = string
-        return cls._query_dict
+                    self.query_dict[name] = string
+        return self.query_dict
