@@ -2,6 +2,11 @@
 
 **This project is for educational purposes only**
 
+## Description of the project
+Having two jsons files there is a task to create a database and its schema with tables that should fit the data from jsons. Then these jsons need to be loaded into the database. Using the description of the required data, the data should be extracted from database and loaded as jsons. The workflow should be logged and tested using python tests.
+
+## Description of the repository
+
 This project contains the following working files:
  - configs - folder that contains a working file
    -  conf_db.py - file with configuration settings
@@ -39,15 +44,24 @@ This project contains the following working files:
     -  queries - class that creates dictionary of queries that extract the data from database
  -  .flake8 - configuration for flake8
  -  .gitignore
- -  .pre-commit-config.yml  - file with configuration for pre-commit
+ -  .pre-commit-config.yaml  - file with configuration for pre-commit
  -  main.py - main file that runs all processes
  -  precommit_requirements.txt  - requirements for pre-commit
  -  requirements.txt  - file that contains versions for modules
-
-
-
 
 ## Requirements
 
 1. Python 3.10.6
 2. PostgreSQL 15.1
+
+## Installation
+
+Use ```pip install -r requirements.txt``` to install packages. If you are going to import your credentials by **.envrc** you need to download [direnv](https://direnv.net/docs/installation.html). Do not fortget to run ```direnv allow``` in your terminal 
+
+## Running the files using pre-commit
+
+If you want to continue the development you can use **.pre-commit-config.yaml** to check and refactor your code. To do this just simply run ```pre-commit run --all-files --show-diff-on-failure``` in terminal
+
+
+
+
