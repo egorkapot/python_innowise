@@ -3,3 +3,4 @@ psycopg2==2.9.5
 psycopg2_binary==2.9.5
 pytest==7.2.0
 SQLAlchemy==1.4.44
+PyYAML==5.4.1

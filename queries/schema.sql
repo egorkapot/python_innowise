@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS task_1;
+CREATE SCHEMA IF NOT EXISTS task_1; #Нужно ли ссылаться на датабейз
 CREATE TABLE IF NOT EXISTS task_1.rooms (
 id int PRIMARY KEY,
 name VARCHAR(50));
