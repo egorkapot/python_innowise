@@ -1,6 +1,5 @@
-pandas==1.5.1
-psycopg2==2.9.5
+pandas==1.5.2
 psycopg2_binary==2.9.5
 pytest==7.2.0
-SQLAlchemy==1.4.44
-PyYAML==5.4.1
+PyYAML==6.0
+SQLAlchemy==1.4.45

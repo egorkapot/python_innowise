@@ -56,12 +56,8 @@ This project contains the following working files:
 
 ## Installation
 
-Use ```pip install -r requirements.txt``` to install packages. If you are going to import your credentials by **.envrc** you need to download [direnv](https://direnv.net/docs/installation.html). Do not fortget to run ```direnv allow``` in your terminal 
+Use ```pip install -r requirements.txt``` to install packages. If you are going to import your credentials by **.envrc** you need to download [direnv](https://direnv.net/docs/installation.html). Do not fortget to run ```direnv allow``` in your terminal
 
 ## Running the files using pre-commit
 
 If you want to continue the development you can use **.pre-commit-config.yaml** to check and refactor your code. To do this just simply run ```pre-commit run --all-files --show-diff-on-failure``` in terminal
-
-
-
-

@@ -23,12 +23,10 @@ services:
     volumes:
       - .:/Innowise_Python_Task1
     networks:
-      - python_net 
+      - python_net
     depends_on:
       db:
         condition: service_healthy
-
-
 
 networks:
   python_net:

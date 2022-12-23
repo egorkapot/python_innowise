@@ -22,6 +22,8 @@ fi
 
 docker stop $(docker ps)
 docker rm $(docker ps -a)
+docker volume rm $(docker volume ls -q)
+docker prune
 docker rmi egor_test
 
 # Build the Docker image
@@ -35,6 +37,3 @@ docker-compose -f $COMPOSE_FILE up -d
 
 # Print the logs for all containers
 # docker-compose -f $COMPOSE_FILE logs
-
-
-

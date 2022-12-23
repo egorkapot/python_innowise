@@ -6,4 +6,4 @@ WORKDIR /Innowise_Python_Task1
 
 RUN python -m pip install --upgrade pip && pip install -r requirements.txt
 
-ENTRYPOINT ["python3", "main.py"] 
+ENTRYPOINT ["python3", "main.py"]
