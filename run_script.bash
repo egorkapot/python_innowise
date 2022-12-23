@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 
-# Stop the script if any commands fail
-
 # Check if Docker is already installed
 if command -v docker > /dev/null && command -v docker-compose &> /dev/null; then
     echo "Docker environment is already installed"
 else
     # Install dependencies and add the Docker repository
-    apt-get update -y
-    apt-get install ca-certificates curl gnupg lsb-release -y
+    apt-get update -y && apt-get install ca-certificates curl gnupg lsb-release -y
     mkdir -p /etc/apt/keyrings
     curl -fsSL -q https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -20,11 +17,10 @@ else
     echo "Docker has been installed"
 fi
 
-docker stop $(docker ps)
-docker rm $(docker ps -a)
+docker stop $(docker ps -q)
+docker rm -f $(docker ps -a)
 docker volume rm $(docker volume ls -q)
-docker prune
-docker rmi egor_test
+docker system prune -a
 
 # Build the Docker image
 docker build -t egor_test .
@@ -36,4 +32,4 @@ COMPOSE_FILE=docker-compose.yml
 docker-compose -f $COMPOSE_FILE up -d
 
 # Print the logs for all containers
-# docker-compose -f $COMPOSE_FILE logs
+docker-compose -f $COMPOSE_FILE logs
