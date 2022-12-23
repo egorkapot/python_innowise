@@ -11,7 +11,7 @@ from modules.postgresdb import Postgres
 from utils.queries import Queries
 
 DEFAULT_CONFIG_LOGGER = 'logg/logging_conf.yml'
-APPLICATION_NAME = 'main'
+APPLICATION_NAME = 'etl'
 setup_logging(DEFAULT_CONFIG_LOGGER)
 logger = logging.getLogger(APPLICATION_NAME)
 
@@ -101,9 +101,9 @@ class ETL(ETL_Base):
             None
         """
         for query_name, query in self.queries.items():
-            if query_name != 'schema':
+            if 'query' in query_name:
                 result_df = self.db.get_df_from_db(query)
-                result_df.to_json(path_or_buf=f'./source/output_data/{query_name}_result.json', orient='table')
+                result_df.to_json(path_or_buf=f'source/output_data/{query_name}_result.json', orient='table')
 
         logger.debug('Dataframes were loaded to JSONs')
 

@@ -1,8 +1,8 @@
 {
     "CONFIGURATION":
-        {   "DATABASE_NAME" : "Egor_Inno_Task",
+        {   "DATABASE_NAME" : "task1",
             "DB_TYPE" : "postgresql",
-            "HOST_ADDRESS" : "127.0.0.1",
+            "HOST_ADDRESS" : "db",
             "PORT" : "5432",
             "DB_USER" : "postgres",
             "DB_PASSWORD" : "1"

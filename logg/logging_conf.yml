@@ -8,7 +8,7 @@ formatters:
 handlers:
   handler_debug:
     class: logging.FileHandler
-    filename: logg/debug.log
+    filename: logg2/debug.log
     level: DEBUG
     formatter: simple
 loggers:

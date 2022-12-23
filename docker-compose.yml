@@ -8,20 +8,18 @@ services:
       POSTGRES_PASSWORD: 1
       POSTGRES_USER: postgres
       POSTGRES_DB: task1
+    ports:
+      - 5432:5432
     networks:
       - python_net
 
   python:
-    image: python:3.10.6 #свой имедж
+    image: egor_test
     volumes:
-      -python_task:app/Innowise_Python_Task1/source/output_data
+      - .:/Innowise_Python_Task1
     networks:
       - python_net 
 
-
-volumes:
-  python_task: ./Innowise_Python_Task1/source/output_data
-    
 networks:
   python_net:
     name: python_net
