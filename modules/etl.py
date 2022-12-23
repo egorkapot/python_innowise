@@ -39,9 +39,11 @@ class ETL(ETL_Base):
             None
         """
 
+        logger.debug('Starting the connection')
         self.db_config = Config().create_connection()
         self.db = Postgres(self.db_config)
         self.queries = Queries().get_query_dict()
+        logger.debug('Connection was created')
 
     def extract(self):
         """

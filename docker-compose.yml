@@ -12,6 +12,11 @@ services:
       - 5432:5432
     networks:
       - python_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "docker_app"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
 
   python:
     image: egor_test
@@ -19,6 +24,11 @@ services:
       - .:/Innowise_Python_Task1
     networks:
       - python_net 
+    depends_on:
+      db:
+        condition: service_healthy
+
+
 
 networks:
   python_net:
