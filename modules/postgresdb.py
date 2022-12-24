@@ -9,7 +9,19 @@ from sqlalchemy import create_engine
 
 class Postgres:
     """
-    Postgres class that contains ETL functions
+    The Postgres class is a utility class that contains various
+    methods for interacting with a PostgreSQL database.
+    It has five methods: __init__, query, create_schema,
+    write_dataframe_to_database, and get_df_from_db.
+
+    Args:
+        db_config: str, credentials to connect to the database
+
+    Attributes:
+        engine: SQLAlchemy engine object for interacting with the database
+        engine_connect: connection object for interacting with the database using the engine object
+        _connect: connection object for interacting with the database using the psycopg2 library
+        _cursor: cursor object for executing queries on the database
     """
 
     def __init__(self, db_config: str):
@@ -52,7 +64,8 @@ class Postgres:
         """
         return self.engine_connect.execute(statement)
 
-    def write_dataframe_to_database(self, df: pd.DataFrame, db_config: str, table_name=None, schema=None) -> Literal[True]:
+    @staticmethod
+    def write_dataframe_to_database(df: pd.DataFrame, db_config: str, table_name=None, schema=None) -> Literal[True]:
         """
         Writes DataFrame object into database
 
@@ -84,5 +97,4 @@ class Postgres:
         Returns:
             Pandas DataFrame object
         """
-        df = pd.read_sql(statement, self._connect)
-        return df
+        return pd.read_sql(statement, self._connect)

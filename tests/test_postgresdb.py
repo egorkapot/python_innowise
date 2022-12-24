@@ -6,10 +6,6 @@ import pytest
 from modules.postgresdb import Postgres
 
 
-def test_can_instantiate_postgres(right_connection_string):
-    Postgres(right_connection_string)
-
-
 def test_can_not_instantiate_postgres_dbconfig_is_none():
     with pytest.raises(ps.OperationalError):
         Postgres(db_config=None)

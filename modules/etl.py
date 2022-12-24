@@ -39,18 +39,17 @@ class ETL(ETL_Base):
             None
         """
 
-        logger.debug('Starting the connection')
+        super().__init__()
+        self.students_df = None
+        self.rooms_df = None
         self.db_config = Config().create_connection()
         self.db = Postgres(self.db_config)
         self.queries = Queries().get_query_dict()
-        logger.debug('Connection was created')
+        logger.debug("Initialized object of ETL class")
 
     def extract(self):
         """
         Getting the dataframes from jsons
-
-        Args:
-            None
 
         Returns:
             None
@@ -64,9 +63,6 @@ class ETL(ETL_Base):
         """
         Creating a database schema with tables
 
-        Args:
-            None
-
         Returns:
             None
         """
@@ -76,9 +72,6 @@ class ETL(ETL_Base):
     def load(self):
         """
         Loading dataframes to database
-
-        Args:
-            None
 
         Returns:
             None
@@ -95,9 +88,6 @@ class ETL(ETL_Base):
     def extract_query_results(self):
         """
         Writing SQL queries to database and loading the result to json
-
-        Args:
-            None
 
         Returns:
             None
@@ -117,3 +107,4 @@ class ETL(ETL_Base):
         self.prepare_db()
         self.load()
         self.extract_query_results()
+        logger.debug("End of ETL process")

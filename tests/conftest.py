@@ -13,8 +13,7 @@ def connection_string_result():
 
 @pytest.fixture
 def right_connection_string():
-    config = Config().create_connection()
-    return config
+    return Config().create_connection()
 
 
 @pytest.fixture

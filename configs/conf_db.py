@@ -5,35 +5,33 @@ import os
 
 
 class Config:
+    """
+     The Config class is used to create a configuration object for
+     connecting to a database. It has two methods: __init__ and create_connection.
+     """
 
-    """
-    Creating a configuration to connect to database
-    """
+    __slots__ = ['db_name', 'db_type', 'db_host', 'db_port', 'db_user', 'db_password']
 
     def __init__(self, source='json', path='configs/config.json') -> None:
         """
-        Creating a config string based on the input source.
-        If source is json - takes the credentials from config.json file located in configs directory
-        If source is env - takes the credentials from the environment which were preuploaded from .envrc file
+        Initialize a new Config object.
 
         Args:
-            source: string with source type, by default is JSON
+            source: string with source type, either 'json' or 'env' (default: 'json')
+            path: string with the path to the JSON configuration file (default: 'configs/config.json')
 
         Returns:
             None
         """
-
         if source == 'json':
             with open(path) as f:
                 config = json.load(f)
-
             self.db_name = config['CONFIGURATION']['DATABASE_NAME']
             self.db_type = config['CONFIGURATION']['DB_TYPE']
             self.db_host = config['CONFIGURATION']['HOST_ADDRESS']
             self.db_port = config['CONFIGURATION']['PORT']
             self.db_user = config['CONFIGURATION']['DB_USER']
             self.db_password = config['CONFIGURATION']['DB_PASSWORD']
-
         elif source == 'env':
             self.db_name = os.environ.get('DATABASE_NAME')
             self.db_type = os.environ.get('DB_TYPE')
@@ -41,20 +39,14 @@ class Config:
             self.db_port = os.environ.get('PORT')
             self.db_user = os.environ.get('DB_USER')
             self.db_password = os.environ.get('DB_PASSWORD')
-
         else:
             raise ValueError('Expected json or env file')
 
     def create_connection(self) -> str:
         """
-        Getting config from class
-
-        Args:
-            None
+        Return a string with the credentials
 
         Returns:
             String with credentials for connection
         """
-        self.db_config = f'{self.db_type}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}'
-
-        return self.db_config
+        return f'{self.db_type}://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}'

@@ -1,14 +1,19 @@
 from __future__ import annotations
 
 import logging.config
-import os
 
 import yaml
 
 
-def setup_logging(config_logger):
+def setup_logging(config_logger: str) -> None:
+    """
+    Set up logging using the specified configuration file.
 
-    if not os.path.exists('logg2'):
+    Args:
+        config_logger: str, path to the logging configuration file
 
-        with open(config_logger) as config_fin:
-            logging.config.dictConfig(yaml.safe_load(config_fin))
+    Returns:
+        None
+    """
+    with open(config_logger) as config_fin:
+        logging.config.dictConfig(yaml.safe_load(config_fin))
