@@ -48,7 +48,8 @@ class Postgres:
             **kwargs: **kwargs
 
         Returns:
-            The method returns None. If a query was executed, the returned values can be retrieved using fetch*() methods
+            The method returns None. If a query was executed,
+            the returned values can be retrieved using fetch*() methods
         """
         return self._cursor.execute(query, **kwargs)
 

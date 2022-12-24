@@ -44,7 +44,7 @@ class ETL(ETL_Base):
         self.rooms_df = None
         self.db_config = Config().create_connection()
         self.db = Postgres(self.db_config)
-        self.queries = Queries().get_query_dict()
+        self.queries = Queries().query_dict
         logger.debug("Initialized object of ETL class")
 
     def extract(self):
