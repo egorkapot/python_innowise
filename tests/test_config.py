@@ -6,11 +6,11 @@ from configs.conf_db import Config
 
 
 def test_can_instantiate_config_json():
-    Config(path='tests/config.json')
+    Config(path='tests/config_test.json')
 
 
 def test_config_can_read_json(connection_string_result):
-    conn_string = Config(path='tests/config.json').create_connection()
+    conn_string = Config(path='tests/config_test.json').create_connection()
     assert connection_string_result == conn_string
 
 

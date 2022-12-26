@@ -10,6 +10,7 @@ Having two jsons files there is a task to create a database and its schema with 
 This project contains the following working files:
  - configs - folder that contains a working file
    -  conf_db.py - file with configuration settings
+   -  config.json - configuration for database in json file
  - logg - folder that contains setup for logging
    -  logger_setup.py - file with setup
    -  debug.log - log file that saves log messages
@@ -35,7 +36,7 @@ This project contains the following working files:
     -  queries_for_test  - contains simple SQL queries for testing
         - query_1.sql
         - query_2.sql
-    -  config.json - config for creation the test connection
+    -  config_test.json - config for creation the test connection
     -  conftest.py - testing file containing pytest fixtures
     -  test_config.py  - file that tests the configuration class
     -  test_postgres.db  - file that tests the postgres class
@@ -48,11 +49,16 @@ This project contains the following working files:
  -  main.py - main file that runs all processes
  -  precommit_requirements.txt  - requirements for pre-commit
  -  requirements.txt  - file that contains versions for modules
+ - docker-compose.yml - compose file running database and custom python script images
+ - Dockerfile - file that is creating a custom Docker image
+ - run_script.bash - bash script to start the process    
 
 ## Requirements
 
 1. Python 3.10.6
 2. PostgreSQL 15.1
+3. Docker - 20.10.22 > not necessary if you run script using run_script.bash
+4. Docker-compose 1.29.2 > not necessary if you run script using run_script.bash
 
 ## Installation
 
