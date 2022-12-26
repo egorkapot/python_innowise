@@ -57,8 +57,10 @@ This project contains the following working files:
 
 1. Python 3.10.6
 2. PostgreSQL 15.1
-3. Docker - 20.10.22 > not necessary if you run script using run_script.bash
-4. Docker-compose 1.29.2 > not necessary if you run script using run_script.bash
+3. Docker - 20.10.22 
+> not necessary if you run script using run_script.bash
+4. Docker-compose 1.29.2 
+> not necessary if you run script using run_script.bash
 
 ## Installation
 
