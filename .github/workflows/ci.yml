@@ -1,0 +1,25 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        pip install -r requirements-test.txt
+    - name: Run tests
+      run: |
+        pytest
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install pre-commit
+      run: |
+        pip install -r requirements-pre-commit.txt
+    - name: Run pre-commit checks
+      run: |
+        pre-commit run --all-files --show-diff-on-failure

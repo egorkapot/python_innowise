@@ -41,6 +41,6 @@ class Queries:
             if filename.is_file():
                 name = filename.path.replace(self.directory, '').rstrip('.sql')
                 with open(filename) as f_in:
-                    string = f_in.read()
+                    string = f_in.read().strip()
                     query_dict[name] = string
         return query_dict
