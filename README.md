@@ -68,7 +68,7 @@ There are two ways of working on this project.
    -  Local development mode - working with the files in developer's mode
    -  Bash script mode - launching the files using bash script that builds Docker image and launches docker-compose build
 
-Both require cloning the repository to your local machine
+>Both require cloning the repository to your local machine
 
 ## Local Development Mode
 
