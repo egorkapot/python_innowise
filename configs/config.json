@@ -1,11 +1,10 @@
 {
-    "CONFIGURATION":
-        {   "DATABASE_NAME" : "task1",
-            "DB_TYPE" : "postgresql",
-            "HOST_ADDRESS" : "db",
-            "PORT" : "5432",
-            "DB_USER" : "postgres",
-            "DB_PASSWORD" : "1"
-        }
-
+  "CONFIGURATION": {
+    "DATABASE_NAME": "task1",
+    "DB_PASSWORD": "1",
+    "DB_TYPE": "postgresql",
+    "DB_USER": "postgres",
+    "HOST_ADDRESS": "db",
+    "PORT": "5432"
+  }
 }

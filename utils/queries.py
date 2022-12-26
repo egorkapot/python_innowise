@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+from mmap import ACCESS_READ
+from mmap import mmap
 
 
 class Queries:
@@ -37,10 +39,11 @@ class Queries:
             Dictionary of query names and SQL strings.
         """
         query_dict = {}
-        for filename in os.scandir(self.directory):
-            if filename.is_file():
-                name = filename.path.replace(self.directory, '').rstrip('.sql')
-                with open(filename) as f_in:
-                    string = f_in.read()
-                    query_dict[name] = string
+        for filename in os.listdir(self.directory):
+            filepath = os.path.join(self.directory, filename)
+            if os.path.isfile(filepath):
+                with open(filepath, 'rb') as f:
+                    with mmap(f.fileno(), 0, access=ACCESS_READ) as m:
+                        name, _ = os.path.splitext(filename)
+                        query_dict[name] = m.read().strip().decode()
         return query_dict

@@ -10,6 +10,8 @@ repos:
     -   id: name-tests-test
         args: [--pytest-test-first]
     -   id: requirements-txt-fixer
+    -   id: pretty-format-json
+        args: [ '--indent=2', '--autofix' ]
 -   repo: https://github.com/asottile/setup-cfg-fmt
     rev: v2.2.0
     hooks:

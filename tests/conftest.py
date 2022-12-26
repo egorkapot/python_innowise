@@ -23,4 +23,4 @@ def get_test_dict():
 
 @pytest.fixture
 def create_class_queries():
-    return Queries(directory='tests/queries_for_test/')
+    return Queries(directory='tests/fixtures/test_queries/')
