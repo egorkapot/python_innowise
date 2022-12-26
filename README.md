@@ -59,8 +59,8 @@ This project contains the following working files:
 1. Python 3.10.6
 2. PostgreSQL 15.1
 <<<<<<< HEAD
-3. Docker 20.10.22 
-4. Docker-compose 1.29.2 
+3. Docker 20.10.22
+4. Docker-compose 1.29.2
 =======
 3. Docker - 20.10.22
 4. Docker-compose 1.29.2
@@ -70,7 +70,7 @@ This project contains the following working files:
 # Installation
 
 <<<<<<< HEAD
-There are two ways of working on this project. 
+There are two ways of working on this project.
    -  Local development mode - working with the files in developer's mode
    -  Bash script mode - launching the files using bash script that builds Docker image and launches docker-compose build
 =======
@@ -109,15 +109,12 @@ If you want to continue the development you can use **.pre-commit-config.yaml** 
 
  You can amend Docker file and add additional logic for building the image. Then you can build Docker image by running ```docker build -t #image_name``` in your terminal
 
- #### Running Docker-compose 
+ #### Running Docker-compose
 
- After building your own image you need to edit **docker-compose** file and change ```image: #put_your_image_name``` in python service. Then run the ```docker-compose up -d``` command in your terminal 
+ After building your own image you need to edit **docker-compose** file and change ```image: #put_your_image_name``` in python service. Then run the ```docker-compose up -d``` command in your terminal
 
 ## Docker installation mode
 
 It is not necessary to have **docker** and **docker-compose** installed. You just need to run the ```sudo bash run_script.bash``` command in your terminal. This script will automatically install docker and docker-compose on your local machine *(this works only for Linux)*. After running the script docker will run the containers with Postgres database and modified Python script. You will receive the output files in ```source/output_data/``` folder on your local machine.
 
 You might receive an error with docker-compose while running this script. It happens because multiple versions of docker-compose were installed. Open your terminal and write ```whereis docker-compose``` that shows all locations of docker-compose. Check if docker-compose is located in ```/local/usr/``` folder and if so remove this using ```sudo rm -r /local/usr/docker-compose```.
-
-
- 
