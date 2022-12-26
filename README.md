@@ -58,20 +58,55 @@ This project contains the following working files:
 
 1. Python 3.10.6
 2. PostgreSQL 15.1
-3. Docker - 20.10.22 
+3. Docker 20.10.22 
 4. Docker-compose 1.29.2 
 > Installing these dependencies is not necessary if you run the script using run_script.bash
 
 # Installation
 
-There are two ways of installation of this project. 
-   -  Local contribution - cloning the repository and working with the files in developer's mode
-   -  Docker mode - launching the files using bash script that launches docker-compose build
+There are two ways of working on this project. 
+   -  Local development mode - working with the files in developer's mode
+   -  Bash script mode - launching the files using bash script that builds Docker image and launches docker-compose build
 
-## Installation
+Both require cloning the repository to your local machine
+
+## Local Development Mode
+
+In Local Development mode you need to have Python and PostgreSQL installed with versions mentioned above. Also you need to set up your own PostgreSQL database and put the configuration parameters into ```config.json``` file.
+
+### Installing dependencies
 
 Use ```pip install -r requirements.txt``` to install packages. If you are going to import your credentials by **.envrc** you need to download [direnv](https://direnv.net/docs/installation.html). Do not fortget to run ```direnv allow``` in your terminal
 
-## Running the files using pre-commit
+### Running the code
+
+To run the code you need to lauch ```main.py``` file
+
+### Performing python testing
+
+All tests for this project are located in ```/tests/``` folder. You can create your own tests and run them by using the following command ```pytest --cov-report term-missing --cov=.```. To ignore files for testing you can amend ```.coveragerc``` file.
+
+### Code refactoring using pre-commit
 
 If you want to continue the development you can use **.pre-commit-config.yaml** to check and refactor your code. To do this just simply run ```pre-commit run --all-files --show-diff-on-failure``` in terminal
+
+### Working with Dockerfile and docker-compose
+
+ The repository contains Dockerfile and docker-compose for running the script. To run the script using docker-compose build you might need to have docker and docker-compose installed.
+
+ #### Building the Docker image
+
+ You can amend Docker file and add additional logic for building the image. Then you can build Docker image by running ```docker build -t #image_name``` in your terminal
+
+ #### Running Docker-compose 
+
+ After building your own image you need to edit **docker-compose** file and change ```image: #put_your_image_name``` in python service. Then run the ```docker-compose up -d``` command in your terminal 
+
+## Docker installation mode
+
+It is not necessary to have **docker** and **docker-compose** installed. You just need to run the ```sudo bash run_script.bash``` command in your terminal. This script will automatically install docker and docker-compose on your local machine *(this works only for Linux)*. After running the script docker will run the containers with Postgres database and modified Python script. You will receive the output files in ```source/output_data/``` folder on your local machine.
+
+You might receive an error with docker-compose while running this script. It happens because multiple versions of docker-compose were installed. Open your terminal and write ```whereis docker-compose``` that shows all locations of docker-compose. Check if docker-compose is located in ```/local/usr/``` folder and if so remove this using ```sudo rm -r /local/usr/docker-compose```.
+
+
+ 
