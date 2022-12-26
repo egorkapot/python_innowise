@@ -45,7 +45,7 @@ class ETL(ETL_Base):
         self.db_config = Config().create_connection()
         self.db = Postgres(self.db_config)
         self.queries = Queries().query_dict
-        logger.debug("Initialized object of ETL class")
+        logger.debug('Initialized object of ETL class')
 
     def extract(self):
         """
@@ -107,4 +107,4 @@ class ETL(ETL_Base):
         self.prepare_db()
         self.load()
         self.extract_query_results()
-        logger.debug("End of ETL process")
+        logger.debug('End of ETL process')

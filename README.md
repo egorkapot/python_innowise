@@ -51,15 +51,15 @@ This project contains the following working files:
  -  requirements.txt  - file that contains versions for modules
  - docker-compose.yml - compose file running database and custom python script images
  - Dockerfile - file that is creating a custom Docker image
- - run_script.bash - bash script to start the process    
+ - run_script.bash - bash script to start the process
 
 ## Requirements
 
 1. Python 3.10.6
 2. PostgreSQL 15.1
-3. Docker - 20.10.22 
+3. Docker - 20.10.22
 > not necessary if you run script using run_script.bash
-4. Docker-compose 1.29.2 
+4. Docker-compose 1.29.2
 > not necessary if you run script using run_script.bash
 
 ## Installation
