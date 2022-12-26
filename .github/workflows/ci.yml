@@ -2,6 +2,10 @@ name: CI
 
 on: [push]
 
+stages:
+  - name: Test
+  - name: Pre-commit checks
+
 jobs:
   test:
     runs-on: ubuntu-latest
