@@ -3,7 +3,8 @@
 **This project is for educational purposes only**
 
 ## Description of the project
-Having two jsons files there is a task to create a database and its schema with tables that should fit the data from jsons. Then these jsons need to be loaded into the database. Using the description of the required data, the data should be extracted from database and loaded as jsons. The workflow should be logged and tested using python tests.
+
+The aim of this project is to show how you can connect to database, load files to database, implement some transformations and load the results on your local machine using Python. The code is written using Object-oriented programming concept. Workflow is logged and tested using python tests. There are two ways of how you can run this project and contribute here. We will discuss them below.
 
 ## Description of the repository
 
@@ -58,9 +59,14 @@ This project contains the following working files:
 1. Python 3.10.6
 2. PostgreSQL 15.1
 3. Docker - 20.10.22 
-> not necessary if you run script using run_script.bash
 4. Docker-compose 1.29.2 
-> not necessary if you run script using run_script.bash
+> Installing these dependencies is not necessary if you run the script using run_script.bash
+
+# Installation
+
+There are two ways of installation of this project. 
+   -  Local contribution - cloning the repository and working with the files in developer's mode
+   -  Docker mode - launching the files using bash script that launches docker-compose build
 
 ## Installation
 
