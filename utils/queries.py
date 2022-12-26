@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Dict
 
 
 class Queries:
@@ -30,7 +29,7 @@ class Queries:
         self.directory = directory
         self.query_dict = self._load_queries()
 
-    def _load_queries(self) -> Dict[str, str]:
+    def _load_queries(self) -> dict[str, str]:
         """
         Load queries from the directory into a dictionary.
 

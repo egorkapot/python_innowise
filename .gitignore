@@ -26,7 +26,7 @@ var/
 .mypy_cache
 .pytest_cache
 .idea
-source/output_data/*
+source/output_data/*.json
 
 # Installer logs
 pip-log.txt
