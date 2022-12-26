@@ -1,0 +1,7 @@
+[run]
+omit =
+    tests/*
+    **/*_test.py
+    **/__init__.py
+    main.py
+    modules/base_etl_class.py
