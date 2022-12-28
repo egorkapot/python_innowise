@@ -32,7 +32,7 @@ class Config:
             self.db_port = config['CONFIGURATION']['PORT']
             self.db_user = config['CONFIGURATION']['DB_USER']
             self.db_password = config['CONFIGURATION']['DB_PASSWORD']
-        elif source == 'env':
+        elif source == 'env':  # pragma: no cover
             self.db_name = os.environ.get('DATABASE_NAME')
             self.db_type = os.environ.get('DB_TYPE')
             self.db_host = os.environ.get('HOST_ADDRESS')

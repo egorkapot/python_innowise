@@ -19,9 +19,9 @@ def setup_module():
             break
 
 
-def teardown_module():
-    # Close the connection
-    os.system('docker stop pg_db')
+# def teardown_module():
+#     # Close the connection
+#     os.system('docker stop pg_db')
 
 
 def test_instantiate_etl(etl_object, pg_conn_string):
@@ -40,5 +40,21 @@ def test_etl_extract(etl_object):
     assert ('birthday', 'id', 'name', 'room', 'sex') == tuple(etl_object.students_df.columns.tolist())
 
 
-def test_can_create_schema(etl_object):
-    etl_object.prepare_db()
+def test_can_create_schema(etl_object, schema_fixture):
+
+    # Check if the schema exists
+    etl_object.db.query("SELECT 1 FROM information_schema.schemata WHERE schema_name = 'test'")
+    result = etl_object.db._cursor.fetchone()
+    assert result is not None
+
+    # Check if the table exists
+    etl_object.db.query("SELECT 1 FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 'rooms'")
+    result = etl_object.db._cursor.fetchone()
+    assert result is not None
+
+    # Check if the table exists
+    etl_object.db.query(
+        "SELECT 1 FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 'students'",
+    )
+    result = etl_object.db._cursor.fetchone()
+    assert result is not None

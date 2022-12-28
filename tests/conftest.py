@@ -64,3 +64,11 @@ def etl_object(mocker, pg_conn_string):
     print(etl.queries)
     # Create an instance of the ETL class
     return etl
+
+
+@pytest.fixture(scope='function')
+def schema_fixture(etl_object):
+    etl_object.prepare_db()
+    yield
+    etl_object.db.query('DROP SCHEMA IF EXISTS test CASCADE')
+    etl_object.db._connect.commit()
