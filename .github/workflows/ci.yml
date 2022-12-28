@@ -1,7 +1,6 @@
 name: CI
 
 on: [push]
-No steps defined in `steps` and no workflow called in `uses` for the following jobs: docker
 
 jobs:
   docker:
@@ -13,6 +12,7 @@ jobs:
         apt-get update && apt-get install -y docker.io
   test:
     runs-on: ubuntu-latest
+    needs: [docker]
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
