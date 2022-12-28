@@ -13,7 +13,7 @@ jobs:
         sh get-docker.sh
     - name: Start Docker daemon
       run: |
-        systemctl start docker
+        sudo systemctl start docker
   test:
     runs-on: ubuntu-latest
     needs: [docker]
