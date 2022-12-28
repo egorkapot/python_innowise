@@ -9,8 +9,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install Docker
       run: |
-        sudo apt-get update
-        sudo apt-get install --allow-unauthenticated --no-install-recommends docker.io
+        sudo apt-get install --no-install-recommends --force-yes docker.io
     - name: Start Docker daemon
       run: |
         systemctl start docker
