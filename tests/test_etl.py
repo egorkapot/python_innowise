@@ -7,21 +7,21 @@ import pandas as pd
 from tests.helpers.check_db import check_database_up
 
 
-def setup_module():
-    # Open a connection
-    os.system('docker run --rm -d -p 5444:5444 -e POSTGRES_PASSWORD=test \
-        -e POSTGRES_USER=test \
-        -e POSTGRES_DB=test \
-        --name pg_db postgres:latest')
-    pg_conn_string = 'postgresql://test:test@172.17.0.2:5432/test'
-    while True:
-        if check_database_up(pg_conn_string):
-            break
+# def setup_module():
+#     # Open a connection
+#     os.system('docker run --rm -d -p 5444:5444 -e POSTGRES_PASSWORD=test \
+#         -e POSTGRES_USER=test \
+#         -e POSTGRES_DB=test \
+#         --name pg_db postgres:latest')
+#     pg_conn_string = 'postgresql://test:test@172.17.0.2:5432/test'
+#     while True:
+#         if check_database_up(pg_conn_string):
+#             break
 
 
-def teardown_module():
-    # Close the connection
-    os.system('docker stop pg_db')
+# def teardown_module():
+#     # Close the connection
+#     os.system('docker stop pg_db')
 
 
 def test_instantiate_etl(etl_object, pg_conn_string):
