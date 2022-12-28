@@ -3,6 +3,11 @@ name: CI
 on: [push]
 
 jobs:
+  docker:
+    runs_on: ubuntu-latest
+    name: Install Docker
+    run: |
+      apt-get update && apt-get install -y docker.io
   test:
     runs-on: ubuntu-latest
     steps:
