@@ -6,7 +6,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3 
+    - uses: actions/setup-docker@v1
     - name: Install Docker
       run: |
         sudo apt-get update && sudo apt-get install --allow-unauthenticated -y docker.io
