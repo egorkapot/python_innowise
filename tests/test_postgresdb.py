@@ -19,3 +19,8 @@ def test_can_not_instantiate_postgres_dbconfig_is_int():
 def test_can_not_instantiate_postgres_dbconfig_is_invalid():
     with pytest.raises(ps.ProgrammingError):
         Postgres(db_config='some_config')
+
+
+def test_can_not_instantiate_postgres_engine_is_none():
+    with pytest.raises(ps.OperationalError):
+        Postgres(db_config=None)

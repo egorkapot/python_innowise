@@ -20,7 +20,6 @@ fi
 docker stop $(docker ps -q)
 docker rm -f $(docker ps -a)
 docker volume rm $(docker volume ls -q)
-docker system prune -a
 
 # Build the Docker image
 docker build -t egor_test .

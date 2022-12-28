@@ -45,5 +45,6 @@ class Queries:
                 with open(filepath, 'rb') as f:
                     with mmap(f.fileno(), 0, access=ACCESS_READ) as m:
                         name, _ = os.path.splitext(filename)
-                        query_dict[name] = m.read().strip().decode()
+                        query_dict[name] = m.read().decode().replace('\t', ' ').strip()
+
         return query_dict
