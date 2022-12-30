@@ -98,4 +98,4 @@ class Postgres:
         Returns:
             Pandas DataFrame object
         """
-        return pd.read_sql(statement, self._connect)  # pragma: no cover
+        return pd.read_sql(statement, self.engine_connect)

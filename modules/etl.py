@@ -28,7 +28,7 @@ class ETL(ETL_Base):
     ROOMS = 'source/input_data/rooms.json'
     STUDENTS = 'source/input_data/students.json'
 
-    def __init__(self) -> None:
+    def __init__(self, save_path='source/output_data/') -> None:
         """
         Creating a connection, initializing a database object and receiving a dictionary with queries
 
@@ -45,6 +45,7 @@ class ETL(ETL_Base):
         self.db_config = Config().create_connection()
         self.db = Postgres(self.db_config)
         self.queries = Queries().query_dict
+        self.save_path = save_path
         logger.debug('Initialized object of ETL class')
 
     def extract(self):
@@ -95,11 +96,11 @@ class ETL(ETL_Base):
         for query_name, query in self.queries.items():
             if 'query' in query_name:
                 result_df = self.db.get_df_from_db(query)
-                result_df.to_json(path_or_buf=f'source/output_data/{query_name}_result.json', orient='table')
+                result_df.to_json(path_or_buf=f'{self.save_path}{query_name}_result.json', orient='table')
 
         logger.debug('Dataframes were loaded to JSONs')
 
-    def run(self):  # pragma: no cover
+    def run(self):
         """
         Running the modules
         """
@@ -108,3 +109,4 @@ class ETL(ETL_Base):
         self.load()
         self.extract_query_results()
         logger.debug('End of ETL process')
+        return True
