@@ -13,15 +13,15 @@ def check_db_queries():
     return [
         "SELECT 1 FROM information_schema.schemata WHERE schema_name = 'task_1'",
         "SELECT 1 FROM information_schema.tables WHERE table_schema = 'task_1' AND table_name = 'rooms'",
-        "SELECT 1 FROM information_schema.tables WHERE table_schema = 'task_1' AND table_name = 'students'"
+        "SELECT 1 FROM information_schema.tables WHERE table_schema = 'task_1' AND table_name = 'students'",
     ]
 
 
 @pytest.fixture()
 def etl_load_queries():
     return [
-        "SELECT 1 FROM task_1.rooms",
-        "SELECT 1 FROM task_1.students"
+        'SELECT 1 FROM task_1.rooms',
+        'SELECT 1 FROM task_1.students',
     ]
 
 
@@ -30,7 +30,7 @@ def setup_module():
         'docker run --rm -d -p 5444:5444 -e POSTGRES_PASSWORD=test \
         -e POSTGRES_USER=test \
         -e POSTGRES_DB=test \
-        --name pg_db postgres:latest'
+        --name pg_db postgres:latest',
     )
     pg_conn_string = 'postgresql://test:test@172.17.0.2:5432/test'
     while True:
