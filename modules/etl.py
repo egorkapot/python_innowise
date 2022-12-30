@@ -99,7 +99,7 @@ class ETL(ETL_Base):
 
         logger.debug('Dataframes were loaded to JSONs')
 
-    def run(self):
+    def run(self):  # pragma: no cover
         """
         Running the modules
         """

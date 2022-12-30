@@ -13,7 +13,7 @@ class Queries:
     The queries can then be accessed by name and used to execute database operations.
 
     Args:
-        directory: Path to the directory containing the query files.
+        directory: Path to the directory containing the execute_query files.
     """
 
     def __init__(self, directory='queries'):
@@ -36,7 +36,7 @@ class Queries:
         Load queries from the directory into a dictionary.
 
         Returns:
-            Dictionary of query names and SQL strings.
+            Dictionary of execute_query names and SQL strings.
         """
         query_dict = {}
         for filename in os.listdir(self.directory):

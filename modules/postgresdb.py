@@ -11,7 +11,7 @@ class Postgres:
     """
     The Postgres class is a utility class that contains various
     methods for interacting with a PostgreSQL database.
-    It has five methods: __init__, query, create_schema,
+    It has five methods: __init__, execute_query, create_schema,
     write_dataframe_to_database, and get_df_from_db.
 
     Args:
@@ -39,7 +39,7 @@ class Postgres:
         self.engine = create_engine(db_config)
         self.engine_connect = self.engine.connect()
 
-    def query(self, query: str, **kwargs):
+    def execute_query(self, query: str, **kwargs):
         """
         Execute a database operation
 
@@ -48,7 +48,7 @@ class Postgres:
             **kwargs: **kwargs
 
         Returns:
-            The method returns None. If a query was executed,
+            The method returns None. If an execute_query was executed,
             the returned values can be retrieved using fetch*() methods
         """
         return self._cursor.execute(query, **kwargs)
@@ -98,4 +98,4 @@ class Postgres:
         Returns:
             Pandas DataFrame object
         """
-        return pd.read_sql(statement, self._connect)
+        return pd.read_sql(statement, self._connect)  # pragma: no cover

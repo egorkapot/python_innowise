@@ -7,7 +7,7 @@ import psycopg2
 
 def check_database_up(conn_string: str, max_attempts: int = 20, interval: float = 0.2) -> bool:
     """
-    Check if a database is up and running by trying to connect to it and execute a simple query.
+    Check if a database is up and running by trying to connect to it and execute a simple execute_query.
 
     Args:
         conn_string (str): The connection string for the database.
