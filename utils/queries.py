@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from mmap import ACCESS_READ
 from mmap import mmap
 
@@ -36,7 +37,7 @@ class Queries:
         Load queries from the directory into a dictionary.
 
         Returns:
-            Dictionary of execute_query names and SQL strings.
+            Dictionary of query names and SQL strings.
         """
         query_dict = {}
         for filename in os.listdir(self.directory):
@@ -45,6 +46,10 @@ class Queries:
                 with open(filepath, 'rb') as f:
                     with mmap(f.fileno(), 0, access=ACCESS_READ) as m:
                         name, _ = os.path.splitext(filename)
-                        query_dict[name] = m.read().decode().replace('\t', ' ').strip()
+                        query = m.read().decode().strip()
+                        query = query.replace('\t', ' ')
+                        query = re.sub(r'\s+', ' ', query)
+                        query = re.sub(r'\n+', ' ', query)
+                        query_dict[name] = query
 
         return query_dict

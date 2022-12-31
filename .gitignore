@@ -27,6 +27,7 @@ var/
 .pytest_cache
 .idea
 source/output_data/*.json
+tests/fixtures/test_etl/output
 
 # Installer logs
 pip-log.txt

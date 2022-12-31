@@ -1,2 +1,4 @@
-SELECT *
-FROM task_1.rooms
+SELECT
+  *
+FROM
+  task_1.rooms

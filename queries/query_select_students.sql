@@ -1,2 +1,4 @@
-SELECT *
-FROM task_1.students
+SELECT
+  *
+FROM
+  task_1.students

@@ -1,11 +1,13 @@
 CREATE SCHEMA IF NOT EXISTS task_1;
 CREATE TABLE IF NOT EXISTS task_1.rooms (
-id int PRIMARY KEY,
-name VARCHAR(50));
+    id int PRIMARY KEY,
+    name VARCHAR(50)
+);
 CREATE TABLE IF NOT EXISTS task_1.students (
-birthday DATE,
-id int,
-name VARCHAR(60),
-room int,
-sex CHAR(1),
-FOREIGN KEY (room) REFERENCES task_1.rooms(id) ON DELETE CASCADE);
+  birthday DATE,
+  id int,
+  name VARCHAR(60),
+  room int,
+  sex CHAR(1),
+  FOREIGN KEY (room) REFERENCES task_1.rooms(id) ON DELETE CASCADE
+);

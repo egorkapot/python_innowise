@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pytest
 
 from configs.conf_db import Config
@@ -19,34 +21,64 @@ def right_connection_string():
 
 @pytest.fixture
 def get_test_dict():
-    return {
-        'query_1': """SELECT s2.room, AGE(s2.max_date, s2.min_date) as age_diff
-FROM(
-SELECT room, MAX(birthday) OVER(PARTITION BY room) as max_date,
-MIN(birthday) OVER(PARTITION BY room) as min_date
-FROM task_1.students)s2
-GROUP BY s2.room, AGE(s2.max_date, s2.min_date)
-ORDER BY age_diff DESC
-LIMIT 5""",
-        'query_2': """SELECT r.name as room, DATE_TRUNC('day', AVG(AGE(s.birthday))) AS average_age
-FROM task_1.students s
-JOIN task_1.rooms r
-ON s.room = r.id
-GROUP BY r.name
-ORDER BY average_age
-LIMIT 5""",
-        'schema': """CREATE SCHEMA IF NOT EXISTS task_1;
-CREATE TABLE IF NOT EXISTS task_1.rooms (
-id int PRIMARY KEY,
-name VARCHAR(50));
-CREATE TABLE IF NOT EXISTS task_1.students (
-birthday DATE,
-id int,
-name VARCHAR(60),
-room int,
-sex CHAR(1),
-FOREIGN KEY (room) REFERENCES task_1.rooms(id) ON DELETE CASCADE);""",
+    query_dict = {
+        'query_1': """
+            SELECT
+              s2.room,
+              AGE(s2.max_date, s2.min_date) as age_diff
+            FROM(
+                SELECT
+                  room,
+                  MAX(birthday) OVER(PARTITION BY room) as max_date,
+                  MIN(birthday) OVER(PARTITION BY room) as min_date
+                FROM
+                  task_1.students
+              ) s2
+            GROUP BY
+              s2.room,
+              AGE(s2.max_date, s2.min_date)
+            ORDER BY
+              age_diff DESC
+            LIMIT
+              5
+        """,
+        'query_2': """
+            SELECT
+              r.name as room,
+              DATE_TRUNC('day', AVG(AGE(s.birthday))) AS average_age
+            FROM
+              task_1.students s
+              JOIN task_1.rooms r ON s.room = r.id
+            GROUP BY
+              r.name
+            ORDER BY
+              average_age
+            LIMIT
+              5
+        """,
+        'schema': """
+            CREATE SCHEMA IF NOT EXISTS task_1;
+            CREATE TABLE IF NOT EXISTS task_1.rooms (
+                id int PRIMARY KEY,
+                name VARCHAR(50)
+            );
+            CREATE TABLE IF NOT EXISTS task_1.students (
+              birthday DATE,
+              id int,
+              name VARCHAR(60),
+              room int,
+              sex CHAR(1),
+              FOREIGN KEY (room) REFERENCES task_1.rooms(id) ON DELETE CASCADE
+            );
+        """,
     }
+    for query_name, query in query_dict.items():
+        query = query.strip()
+        query = query.replace('\t', ' ')
+        query = re.sub(r'\s+', ' ', query)
+        query = re.sub(r'\n+', ' ', query)
+        query_dict[query_name] = query
+    return query_dict
 
 
 @pytest.fixture
@@ -72,20 +104,3 @@ def etl_object(mocker, pg_conn_string):
     etl.ROOMS = 'tests/fixtures/test_etl/input/test_rooms.json'
     etl.STUDENTS = 'tests/fixtures/test_etl/input/test_students.json'
     return etl
-
-#
-# @pytest.fixture(scope="function")
-# def create_schema_fixture(etl_object):
-#     etl_object.prepare_db()
-#     yield
-#     etl_object.db.execute_query("DROP SCHEMA IF EXISTS task_1 CASCADE")
-#     etl_object.db._connect.commit()
-#
-#
-# @pytest.fixture(scope="function")
-# def etl_load_fixture(etl_object):
-#     etl_object.extract()
-#     etl_object.prepare_db()
-#     yield
-#     etl_object.db.execute_query("DROP SCHEMA IF EXISTS task_1 CASCADE")
-#     etl_object.db._connect.commit()
