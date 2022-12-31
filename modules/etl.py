@@ -83,7 +83,6 @@ class ETL(ETL_Base):
         self.db.write_dataframe_to_database(
             df=self.rooms_df, db_config=self.db_config, table_name='rooms', schema='task_1',
         )
-
         logger.debug('Dataframes were loaded to database')
 
     def extract_query_results(self):
@@ -97,7 +96,6 @@ class ETL(ETL_Base):
             if 'query' in query_name:
                 result_df = self.db.get_df_from_db(query)
                 result_df.to_json(path_or_buf=f'{self.save_path}{query_name}_result.json', orient='table')
-
         logger.debug('Dataframes were loaded to JSONs')
 
     def run(self):
